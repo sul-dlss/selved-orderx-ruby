@@ -11,7 +11,7 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 set :log_level, :info
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/s/SUL/Bin/#{fetch(:application)}"
+set :deploy_to, "/s/SUL/Bin/SelvedWrapper/#{fetch(:application)}"
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w[]
