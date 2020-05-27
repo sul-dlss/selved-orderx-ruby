@@ -14,7 +14,7 @@ class ReturnAllInput
     lines.each do |line|
       line_array = line.split('|')
       key = line_array[0]
-      data = line_array.slice(1..).join('|')
+      data = line_array[1, line_array.length].join('|')
       @hash[key] = data
     end
   end
