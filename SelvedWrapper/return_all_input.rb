@@ -21,8 +21,9 @@ class ReturnAllInput
 
   def pipe_hash(file)
     update_hash(file)
+    parsed_val = ''
     @hash.each do |key, value|
-      value.empty? ? parsed_val = '' : parsed_val = parse_json(value)
+      parsed_val = parse_json(value) unless value.empty?
       print "#{key}|#{parsed_val}|\n"
     end
   end
