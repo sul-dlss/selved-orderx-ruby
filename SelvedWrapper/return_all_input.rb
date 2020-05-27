@@ -23,7 +23,9 @@ class ReturnAllInput
     update_hash(file)
     parsed_val = ''
     @hash.each do |key, value|
-      parsed_val = parse_json(value) unless value.empty?
+      unless value.empty?
+        parsed_val = parse_json(value)
+      end
       print "#{key}|#{parsed_val}|\n"
     end
   end
@@ -33,3 +35,4 @@ class ReturnAllInput
     parser.main
   end
 end
+
