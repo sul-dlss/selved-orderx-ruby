@@ -1,0 +1,30 @@
+{
+  "BIGDEAL": [
+    {
+      "A": 4,
+      "D": "&#124;aThis is a big deal",
+      "I": ""
+    }
+  ],
+  "MULTIYEAR": [
+    {
+      "A": 5,
+      "D": "&#124;a2018 to present",
+      "I": ""
+    }
+  ],
+  "DATA": [
+    {
+      "A": 6,
+      "D": "&#124;aThis is data",
+      "I": ""
+    }
+  ],
+  "STREAMING": [
+    {
+      "A": 7,
+      "D": "&#124;aThis is streaming",
+      "I": ""
+    }
+  ]
+}
