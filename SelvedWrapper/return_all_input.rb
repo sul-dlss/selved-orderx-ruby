@@ -13,10 +13,10 @@ class ReturnAllInput
     lines = IO.readlines(file, chomp: true)
     lines.each do |line|
       line_array = line.split('|')
-      key = line_array[0].chomp
+      key = line_array[0]
       value = @hash[key]
       data = line_array[1, line_array.length].join('|')
-      @hash[key] = "#{value}#{add_pipe(value)}#{data}"
+      @hash[key] = "#{value}#{add_pipe(value)}#{data.chomp}"
     end
   end
 
@@ -26,13 +26,13 @@ class ReturnAllInput
       pipe_vals = value.split('|')
       # Test if the last pipe field is parsable
       begin
-        last_pipe = parse_json(pipe_vals[-1])
+        last_pipe = parse_json(pipe_vals[-1]).chomp
       rescue TypeError, JSON::ParserError
         last_pipe = pipe_vals[-1]
       end
       data = pipe_vals.pop && pipe_vals.push(last_pipe) && pipe_vals.join('|')
       # data includes leading pipe: |data
-      print "#{key}#{data}\n"
+      print "#{key.chomp}#{data}\n"
     end
   end
 
