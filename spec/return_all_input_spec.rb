@@ -21,7 +21,7 @@ RSpec.describe ReturnAllInput do
 
       it 'keeps the same number of entries' do
         output = result.pipe_hash('spec/fixtures/selved_data.txt')
-        expect(output.size).to eq 14
+        expect(output.size).to eq 11
       end
 
       it 'populates the matching selved data' do
@@ -43,8 +43,8 @@ RSpec.describe ReturnAllInput do
       end
 
       it 'keeps the same number of entries' do
-        output = result.pipe_hash('spec/fixtures/selved_data.txt')
-        expect(output.size).to eq 11
+        output = result.pipe_hash('spec/fixtures/selved_selorder_data.txt')
+        expect(output.size).to eq 10
       end
 
       it 'populates the matching selved data' do
@@ -53,8 +53,12 @@ RSpec.describe ReturnAllInput do
       end
 
       it 'parses the selved json' do
-        output = result.pipe_hash('spec/fixtures/selved_data.txt')
-        expect(output['4015377']).to eq '|20170628|4015377|APPROVAL|{"STREAMING":[{"A":5,"D":"&#124;aHosted by a test service","I":""}]}'
+        output = result.pipe_hash('spec/fixtures/selved_selorder_data.txt')
+        expect(output['4109500']).to eq '|20171121|4109500|APPROVAL|{'\
+                                                '"BIGDEAL":[{"A":4,"D":"&#124;aThis is a big deal","I":""}],'\
+                                                '"MULTIYEAR":[{"A":5,"D":"&#124;a2018 to present","I":""}],'\
+                                                '"DATA":[{"A":6,"D":"&#124;aThis is data","I":""}],'\
+                                                '"STREAMING":[{"A":7,"D":"&#124;aThis is streaming","I":""}]}'
       end
     end
   end

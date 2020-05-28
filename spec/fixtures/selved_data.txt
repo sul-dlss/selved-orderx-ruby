@@ -1,6 +1,3 @@
 4109500|{"BIGDEAL":[{"A":4,"D":"&#124;aThis is a big deal","I":""}],"MULTIYEAR":[{"A":5,"D":"&#124;a2018 to present","I":""}],"DATA":[{"A":6,"D":"&#124;aThis is data","I":""}],"STREAMING":[{"A":7,"D":"&#124;aThis is streaming","I":""}]}|
 4345863|{"BIGDEAL":[{"A":5,"D":"&#124;aTest Bigdeal","I":""}]}|
 4050248|{"BIGDEAL":[{"A":5,"D":"&#124;aTest Bigdeal","I":""}]}|
-4034557|{"STREAMING":[{"A":5,"D":"&#124;aHosted by a test service","I":""}]}|
-4034558|{"STREAMING":[{"A":5,"D":"&#124;aHosted by a test service","I":""}]}|
-4015377|{"STREAMING":[{"A":5,"D":"&#124;aHosted by a test service","I":""}]}|
