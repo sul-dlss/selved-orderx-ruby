@@ -13,20 +13,31 @@ class ReturnAllInput
     lines = IO.readlines(file, chomp: true)
     lines.each do |line|
       line_array = line.split('|')
-      key = line_array[0]
+      key = line_array[0].chomp
+      value = @hash[key]
       data = line_array[1, line_array.length].join('|')
-      @hash[key] = data
+      @hash[key] = "#{value}#{add_pipe(value)}#{data}"
     end
   end
 
   def pipe_hash(file)
     update_hash(file)
-    parsed_val = ''
     @hash.each do |key, value|
-      json = value.chomp.chomp('|')
-      parsed_val = parse_json(json) unless json.empty?
-      print "#{key}|#{parsed_val}|\n"
+      pipe_vals = value.split('|')
+      # Test if the last pipe field is parsable
+      begin
+        last_pipe = parse_json(pipe_vals[-1])
+      rescue TypeError, JSON::ParserError
+        last_pipe = pipe_vals[-1]
+      end
+      data = pipe_vals.pop && pipe_vals.push(last_pipe) && pipe_vals.join('|')
+      # data includes leading pipe: |data
+      print "#{key}#{data}\n"
     end
+  end
+
+  def add_pipe(data)
+    '|' unless data == '|'
   end
 
   def parse_json(json)
