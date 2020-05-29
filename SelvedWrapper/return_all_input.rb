@@ -31,7 +31,7 @@ class ReturnAllInput
       end
       data = pipe_vals.pop && pipe_vals.push(last_pipe) && pipe_vals.join('|')
       # data includes leading pipe: |data
-      print "#{key}#{data}\n"
+      print "#{key}#{data}|\n"
     end
   end
 
