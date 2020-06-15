@@ -19,4 +19,6 @@ set :deploy_to, "/s/SUL/Bin/SelvedWrapper/#{fetch(:application)}"
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
-set :default_env, { path: '/s/sirsi/.rvm/gems/ruby-2.6.3/bin:/usr/local/rvm/gems/ruby-2.6.3/bin:/usr/local/rvm/gems/ruby-2.6.3@global/bin:/usr/local/rvm/rubies/ruby-2.6.3/bin:/usr/ucb:/bin:/usr/bin:/etc:/usr/sbin:/usr/local/rvm/bin' }
+set :default_env, { path: '/s/sirsi/.rvm/gems/ruby-2.6.3/bin:/usr/local/rvm/gems/ruby-2.6.3/bin:'\
+                          '/usr/local/rvm/gems/ruby-2.6.3@global/bin:/usr/local/rvm/rubies/ruby-2.6.3/bin:'\
+                          '/usr/ucb:/bin:/usr/bin:/etc:/usr/sbin:/usr/local/rvm/bin' }
