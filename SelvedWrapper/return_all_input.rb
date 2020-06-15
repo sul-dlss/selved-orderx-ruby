@@ -19,8 +19,7 @@ class ReturnAllInput
     end
   end
 
-  def pipe_hash(file)
-    update_hash(file)
+  def pipe_hash
     @hash.each do |key, value|
       pipe_vals = value.split('|')
       # Test if the last pipe field is parsable
@@ -40,4 +39,3 @@ class ReturnAllInput
     parser.main
   end
 end
-

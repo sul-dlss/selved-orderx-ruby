@@ -3,6 +3,7 @@
 require 'spec_helper'
 require_relative '../SelvedWrapper/return_all_input'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe ReturnAllInput do
   let(:result) { described_class.new }
 
@@ -20,17 +21,20 @@ RSpec.describe ReturnAllInput do
       end
 
       it 'keeps the same number of entries' do
-        output = result.pipe_hash('spec/fixtures/selved_data.txt')
+        result.update_hash('spec/fixtures/selved_data.txt')
+        output = result.pipe_hash
         expect(output.size).to eq 11
       end
 
       it 'populates the matching selved data' do
-        output = result.pipe_hash('spec/fixtures/selved_data.txt')
+        result.update_hash('spec/fixtures/selved_data.txt')
+        output = result.pipe_hash
         expect(output['4109500'].length).to be > 10
       end
 
       it 'parses the selved json' do
-        output = result.pipe_hash('spec/fixtures/selved_data.txt')
+        result.update_hash('spec/fixtures/selved_data.txt')
+        output = result.pipe_hash
         expect(output['4345863']).to eq '|{"BIGDEAL":[{"A":5,"D":"&#124;aTest Bigdeal","I":""}]}'
       end
     end
@@ -42,7 +46,8 @@ RSpec.describe ReturnAllInput do
 
       it 'should be a pipe-delimited string' do
         printed = capture_stdout do
-          result.pipe_hash('spec/fixtures/selved_data.txt')
+          result.update_hash('spec/fixtures/selved_data.txt')
+          result.pipe_hash
         end
 
         expect(printed.include?('4345863|BIGDEAL: Test Bigdeal|')).to be_truthy
@@ -57,17 +62,20 @@ RSpec.describe ReturnAllInput do
       end
 
       it 'keeps the same number of entries' do
-        output = result.pipe_hash('spec/fixtures/selved_selorder_data.txt')
+        result.update_hash('spec/fixtures/selved_selorder_data.txt')
+        output = result.pipe_hash
         expect(output.size).to eq 10
       end
 
       it 'populates the matching selved data' do
-        output = result.pipe_hash('spec/fixtures/selved_data.txt')
+        result.update_hash('spec/fixtures/selved_data.txt')
+        output = result.pipe_hash
         expect(output['4015377'].length).to be > 10
       end
 
       it 'parses the selved json' do
-        output = result.pipe_hash('spec/fixtures/selved_selorder_data.txt')
+        result.update_hash('spec/fixtures/selved_selorder_data.txt')
+        output = result.pipe_hash
         expect(output['4109500']).to eq '|20171121|4109500|APPROVAL|{'\
                                                 '"BIGDEAL":[{"A":4,"D":"&#124;aThis is a big deal","I":""}],'\
                                                 '"MULTIYEAR":[{"A":5,"D":"&#124;a2018 to present","I":""}],'\
@@ -83,14 +91,16 @@ RSpec.describe ReturnAllInput do
     end
 
     it 'should be a pipe-delimited string' do
+      result.update_hash('spec/fixtures/selved_selorder_data.txt')
       printed = capture_stdout do
-        result.pipe_hash('spec/fixtures/selved_selorder_data.txt')
+        result.pipe_hash
       end
 
       expect(printed.include?('4345863|19971222|4345863|SUBSCRIPT|BIGDEAL: Test Bigdeal|')).to be_truthy
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
 
 def capture_stdout(&blk)
   old = $stdout
