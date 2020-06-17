@@ -7,4 +7,4 @@ cache:
   - directories
     - '/home/travis/.rvm/'
 bundler_args: --without production
-script: bundle exec rake spec
+script: bundle exec rspec
