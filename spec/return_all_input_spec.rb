@@ -9,94 +9,46 @@ RSpec.describe ReturnAllInput do
 
   describe 'update_hash' do
     it 'populates the hash with the initial set of order keys' do
-      keys = result.update_hash('spec/fixtures/order_keys.txt')
-      expect(keys.size).to eq 11
+      keys = result.populate_hash('spec/fixtures/selved_selorder_data.txt')
+      expect(keys.size).to eq 306
     end
   end
 
-  context 'when there is only an order key as the input' do
-    describe 'pipe_hash adds the matching selved data using the order key' do
-      before do
-        result.update_hash('spec/fixtures/order_keys.txt')
-      end
-
-      it 'keeps the same number of entries' do
-        result.update_hash('spec/fixtures/selved_data.txt')
-        output = result.pipe_hash
-        expect(output.size).to eq 11
-      end
-
-      it 'populates the matching selved data' do
-        result.update_hash('spec/fixtures/selved_data.txt')
-        output = result.pipe_hash
-        expect(output['4109500'].length).to be > 10
-      end
-
-      it 'parses the selved json' do
-        result.update_hash('spec/fixtures/selved_data.txt')
-        output = result.pipe_hash
-        expect(output['4345863']).to eq '|{"BIGDEAL":[{"A":5,"D":"&#124;aTest Bigdeal","I":""}]}'
-      end
+  describe 'update_hash adds the matching selved data using the orderline pipe field + fund id as the hash key' do
+    before do
+      result.populate_hash('spec/fixtures/selved_selorder_data.txt')
+      result.update_hash('spec/fixtures/selved_data.txt')
     end
 
-    describe 'stdout' do
-      before do
-        result.update_hash('spec/fixtures/order_keys.txt')
-      end
-
-      it 'should be a pipe-delimited string' do
-        printed = capture_stdout do
-          result.update_hash('spec/fixtures/selved_data.txt')
-          result.pipe_hash
-        end
-
-        expect(printed.include?('4345863|BIGDEAL: Test Bigdeal|')).to be_truthy
-      end
+    it 'keeps the same number of entries' do
+      expect(result.hash.size).to eq 306
     end
-  end
 
-  context 'when there are several fields of order data in the order_keys file' do
-    describe 'pipe_hash adds the matching selved data using the order key' do
-      before do
-        result.update_hash('spec/fixtures/selorder_data.txt')
-      end
+    it 'populates the matching selved data' do
+      expect(result.hash['5560684_1065032-101-NAAUS'].length).to be > 12
+    end
 
-      it 'keeps the same number of entries' do
-        result.update_hash('spec/fixtures/selved_selorder_data.txt')
-        output = result.pipe_hash
-        expect(output.size).to eq 10
-      end
-
-      it 'populates the matching selved data' do
-        result.update_hash('spec/fixtures/selved_data.txt')
-        output = result.pipe_hash
-        expect(output['4015377'].length).to be > 10
-      end
-
-      it 'parses the selved json' do
-        result.update_hash('spec/fixtures/selved_selorder_data.txt')
-        output = result.pipe_hash
-        expect(output['4109500']).to eq '|20171121|4109500|APPROVAL|{'\
-                                                '"BIGDEAL":[{"A":4,"D":"&#124;aThis is a big deal","I":""}],'\
-                                                '"MULTIYEAR":[{"A":5,"D":"&#124;a2018 to present","I":""}],'\
-                                                '"DATA":[{"A":6,"D":"&#124;aThis is data","I":""}],'\
-                                                '"STREAMING":[{"A":7,"D":"&#124;aThis is streaming","I":""}]}'
-      end
+    it 'parses the selved json' do
+      result.pipe_hash
+      expect(result.hash['5560684_1065032-101-NAAUS'])
+        .to eq '4588388|20201026|4588388|VISUAL|-5510489|'\
+                        '13728055|1|BLS|5560684|1065032-101-NAAUS|1|20201026|'\
+                        '{"STREAMING":[{"A":8,"D":"&#124;aHosted by New Day Films","I":"","X":4}]}'
     end
   end
 
   describe 'stdout' do
     before do
-      result.update_hash('spec/fixtures/selorder_data.txt')
+      result.populate_hash('spec/fixtures/selved_selorder_data.txt')
+      result.update_hash('spec/fixtures/selved_data.txt')
     end
 
     it 'should be a pipe-delimited string' do
-      result.update_hash('spec/fixtures/selved_selorder_data.txt')
       printed = capture_stdout do
         result.pipe_hash
       end
 
-      expect(printed.include?('4345863|19971222|4345863|SUBSCRIPT|BIGDEAL: Test Bigdeal|')).to be_truthy
+      expect(printed.include?('1065032-101-NAAUS|1|20201026|STREAMING: Hosted by New Day Films|')).to be_truthy
     end
   end
 end
