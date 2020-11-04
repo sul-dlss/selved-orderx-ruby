@@ -1,2 +1,0 @@
-4345863|19971222|4345863|SUBSCRIPT|{"BIGDEAL":[{"A":5,"D":"&#124;aTest Bigdeal","I":""}]}|
-4109500|20171121|4109500|APPROVAL|{"BIGDEAL":[{"A":4,"D":"&#124;aThis is a big deal","I":""}],"MULTIYEAR":[{"A":5,"D":"&#124;a2018 to present","I":""}],"DATA":[{"A":6,"D":"&#124;aThis is data","I":""}],"STREAMING":[{"A":7,"D":"&#124;aThis is streaming","I":""}]}|
