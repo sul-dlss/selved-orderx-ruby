@@ -15,6 +15,9 @@ class ReturnAllInput
     lines = IO.readlines(file, chomp: true)
     lines.each do |line|
       line_array = line.split('|')
+      # Example of output line of selorder from expenditure report
+      # Hash key will be a concatenation of the orderline key and the fund id (e.g. 5532267_1065031-105-KBADW)
+      # 4576261|20200824|4576261|EAPPROVAL|-5492251|13677727|1||5532267|1065031-105-KBADW|1|20200824|
       key = line_array.slice(8..9).join('_')
       data = line_array.join('|')
       @hash[key] = data.chomp
@@ -33,7 +36,7 @@ class ReturnAllInput
   end
 
   def pipe_hash
-    @hash.each do |key, value|
+    @hash.each do |_, value|
       pipe_vals = value.split('|')
       # Test if the last pipe field is parsable
       begin
@@ -42,7 +45,7 @@ class ReturnAllInput
         last_pipe = pipe_vals[-1]
       end
       data = pipe_vals.pop && pipe_vals.push(last_pipe) && pipe_vals.join('|')
-      # data includes leading pipe: |data
+      # data includes trailing pipe: data|
       print "#{data}|\n"
     end
   end

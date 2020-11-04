@@ -9,14 +9,14 @@ RSpec.describe ReturnAllInput do
 
   describe 'update_hash' do
     it 'populates the hash with the initial set of order keys' do
-      keys = result.populate_hash('spec/fixtures/selved_selorder_data.txt')
+      keys = result.populate_hash('spec/fixtures/expend_report_selorder_data.txt')
       expect(keys.size).to eq 306
     end
   end
 
   describe 'update_hash adds the matching selved data using the orderline pipe field + fund id as the hash key' do
     before do
-      result.populate_hash('spec/fixtures/selved_selorder_data.txt')
+      result.populate_hash('spec/fixtures/expend_report_selorder_data.txt')
       result.update_hash('spec/fixtures/selved_data.txt')
     end
 
@@ -39,7 +39,7 @@ RSpec.describe ReturnAllInput do
 
   describe 'stdout' do
     before do
-      result.populate_hash('spec/fixtures/selved_selorder_data.txt')
+      result.populate_hash('spec/fixtures/expend_report_selorder_data.txt')
       result.update_hash('spec/fixtures/selved_data.txt')
     end
 
