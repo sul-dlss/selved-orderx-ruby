@@ -26,11 +26,11 @@ class ReturnAllInput
 
   def update_hash(file)
     lines = IO.readlines(file, chomp: true)
-    lines.each do |line|
-      line_array = line.split('|')
-      @hash.each do |key, value|
-        hash_order_key = value.split('|')[0]
-        hash_order_key == line_array[0] && @hash[key] << "|#{line_array.slice(-1)}"
+    @hash.each do |key, value|
+      hash_order_key = value.split('|')[0]
+      lines.each do |line|
+        line_array = line.split('|')
+        hash_order_key == line_array[0] && @hash[key] << "|#{line_array.slice(-1)}" && break
       end
     end
   end
