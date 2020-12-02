@@ -13,12 +13,16 @@ class ReturnAllInput
 
   def populate_hash(file)
     lines = IO.readlines(file, chomp: true)
-    lines.each do |line|
+    lines.each_with_index do |line, index|
       line_array = line.split('|')
       # Example of output line of selorder from expenditure report
-      # Hash key will be a concatenation of the orderline key and the fund id (e.g. 5532267_1065031-105-KBADW)
+      # For Expenditures, Hash key will be a concatenation of the orderline key and the fund id
+      # (e.g. 5532267_1065031-105-KBADW_0)
       # 4576261|20200824|4576261|EAPPROVAL|-5492251|13677727|1||5532267|1065031-105-KBADW|1|20200824|
-      key = line_array.slice(8..9).join('_')
+      # For Encumbrances it is the fiscal cycle + order key (e.g 2021_4556074_0).
+      # 4556074|20200811|1|20190904|$0.00|2021|SUL|503724F20|2021|4556074|
+      # Add a line index value to ensure absolute uniqueness..
+      key = "#{line_array.slice(8..9).join('_')}_#{index}"
       data = line_array.join('|')
       @hash[key] = data.chomp
     end
@@ -30,7 +34,7 @@ class ReturnAllInput
       hash_order_key = value.split('|')[0]
       lines.each do |line|
         line_array = line.split('|')
-        hash_order_key == line_array[0] && @hash[key] << "|#{line_array.slice(-1)}" && break
+        line_array[0] == hash_order_key && @hash[key] << "|#{line_array.slice(-1)}" && break
       end
     end
   end
