@@ -25,12 +25,13 @@ RSpec.describe ReturnAllInput do
     end
 
     it 'populates the matching selved data' do
-      expect(result.hash['5560684_1065032-101-NAAUS'].length).to be > 12
+      puts result.hash
+      expect(result.hash['5560684_1065032-101-NAAUS_234'].length).to be > 12
     end
 
     it 'parses the selved json' do
       result.pipe_hash
-      expect(result.hash['5560684_1065032-101-NAAUS'])
+      expect(result.hash['5560684_1065032-101-NAAUS_234'])
         .to eq '4588388|20201026|4588388|VISUAL|-5510489|'\
                         '13728055|1|BLS|5560684|1065032-101-NAAUS|1|20201026|'\
                         '{"STREAMING":[{"A":8,"D":"&#124;aHosted by New Day Films","I":"","X":4}]}'
