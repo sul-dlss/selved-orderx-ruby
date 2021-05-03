@@ -23,7 +23,7 @@ class ReturnAllInput
       # 4556074|20200811|1|20190904|$0.00|2021|SUL|503724F20|2021|4556074|
       # Add a line index value to ensure absolute uniqueness..
       begin
-      key = "#{line_array.slice(8..9).join('_')}_#{index}"
+        key = "#{line_array.slice(8..9).join('_')}_#{index}"
       rescue NoMethodError # when trying to do a join on a non-existing slice range
         next
       end

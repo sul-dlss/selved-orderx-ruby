@@ -3,7 +3,6 @@
 require 'spec_helper'
 require_relative '../SelvedWrapper/return_all_input'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe ReturnAllInput do
   let(:result) { described_class.new }
 
@@ -53,8 +52,6 @@ RSpec.describe ReturnAllInput do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength
-
 def capture_stdout(&blk)
   old = $stdout
   $stdout = fake = StringIO.new

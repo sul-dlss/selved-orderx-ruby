@@ -1,3 +1,6 @@
 # Ignore all logfiles and tempfiles.
+order_keys.txt
+selved_data.txt
 /log/*
 /tmp
+/temp
