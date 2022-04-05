@@ -32,8 +32,8 @@ RSpec.describe ReturnAllInput do
       result.pipe_hash
       expect(result.hash['5560684_1065032-101-NAAUS_234'])
         .to eq '4588388|20201026|4588388|VISUAL|-5510489|'\
-                        '13728055|1|BLS|5560684|1065032-101-NAAUS|1|20201026|'\
-                        '{"STREAMING":[{"A":8,"D":"&#124;aHosted by New Day Films","I":"","X":4}]}'
+               '13728055|1|BLS|5560684|1065032-101-NAAUS|1|20201026|'\
+               '{"STREAMING":[{"A":8,"D":"&#124;aHosted by New Day Films","I":"","X":4}]}'
     end
   end
 

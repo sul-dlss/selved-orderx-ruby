@@ -12,7 +12,7 @@ class ReturnAllInput
   end
 
   def populate_hash(file)
-    lines = IO.readlines(file, chomp: true)
+    lines = File.readlines(file, chomp: true)
     lines.each_with_index do |line, index|
       line_array = line.split('|')
       # Example of output line of selorder from expenditure report
@@ -33,12 +33,12 @@ class ReturnAllInput
   end
 
   def update_hash(file)
-    lines = IO.readlines(file)
+    lines = File.readlines(file)
     @hash.each do |key, value|
       hash_order_key = value.split('|')[0]
       lines.each do |line|
         line_array = line.chomp.split('|')
-        line_array[0] == hash_order_key && @hash[key] << "|#{line_array.slice(-1)}" && break
+        line_array[0] == hash_order_key && (@hash[key] << "|#{line_array.slice(-1)}") && break
       end
     end
   end
